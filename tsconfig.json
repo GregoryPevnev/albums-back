@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "allowJs": true,
+        // "types": ["node"], -- NEVER USE(LIKE HELL)
+        "moduleResolution": "node" /* Resolve node_modules */,
+        "strict": true,
+        "noImplicitAny": true,
+        "strictNullChecks": false /* Allow nulls - much more conventient */,
+        "alwaysStrict": true,
+        "esModuleInterop": true,
+
+        /* Decorators and metadata */
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true
+    },
+    "include": ["./src/**/*", "./tests/**/*"]
+}
