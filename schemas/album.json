@@ -1,0 +1,29 @@
+{
+    "$id": "album",
+    "title": "Album",
+    "description": "Model for creating and editing albums",
+    "type": "object",
+    "properties": {
+        "title": {
+            "type": "string",
+            "minLength": 1
+        },
+        "artist": {
+            "type": "string",
+            "minLength": 1
+        },
+        "image": {
+            "type": "string"
+        },
+        "songs": {
+            "type": "array",
+            "items": {
+                "$ref": "song"
+            },
+            "minItems": 1,
+            "uniqueItems": true
+        }
+    },
+    "required": ["title", "artist", "songs"],
+    "additionalProperties": false
+}
