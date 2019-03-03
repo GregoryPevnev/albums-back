@@ -22,7 +22,6 @@ class DatabaseManager {
     }
 
     private constructor(private readonly deleter: DeleteObjects) {
-        // IMPORTANT: Using a single instance of connection for better management
         this.client = Knex(require("../../knexfile"));
     }
 

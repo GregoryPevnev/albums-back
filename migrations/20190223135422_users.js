@@ -1,4 +1,4 @@
-exports.up = function(knex, Promise) {
+exports.up = function(knex, _) {
     return knex.schema.createTable("users", builder => {
         builder.string("id").primary("primary_string_id");
         builder
@@ -15,6 +15,6 @@ exports.up = function(knex, Promise) {
     });
 };
 
-exports.down = function(knex, Promise) {
+exports.down = function(knex, _) {
     return knex.schema.dropTable("users");
 };
