@@ -1,19 +1,14 @@
-import AJV from "ajv";
 import getSchemaLoader from "./loader";
 import getSchemaValidator from "./schemaValidator";
 import Validators from "../application/services/validation";
+import getAJV from "./ajv";
 
 const EXTRA_SCHEMAS = ["song"];
 const VALIDATON_SCHEMAS = ["album", "review", "signIn", "signUp", "details"];
 
 const getValidators = async (schemasPath: string): Promise<Validators> => {
     const loader = getSchemaLoader(schemasPath);
-    const ajv = new AJV({
-        allErrors: true,
-        useDefaults: true,
-        coerceTypes: true,
-        schemaId: "$id"
-    });
+    const ajv = getAJV();
 
     const extraSchemas = await Promise.all(EXTRA_SCHEMAS.map(loader));
     extraSchemas.forEach(schema => ajv.addSchema(schema));
