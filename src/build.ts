@@ -27,7 +27,6 @@ interface Params {
 }
 
 const build = async ({ secret, schemaPath, api, cache, storage }: Params) => {
-    // Building details
     const validators = await getValidators(schemaPath);
     console.log("Validators built");
 
@@ -40,7 +39,6 @@ const build = async ({ secret, schemaPath, api, cache, storage }: Params) => {
     const databaseManager = DatabaseManager.init(storageManager.objectsDeleter());
     console.log("Connected to Database");
 
-    // Building View
     const server = createServer(
         {
             tokens: cacheManager.tokensStore(),
@@ -62,7 +60,6 @@ const build = async ({ secret, schemaPath, api, cache, storage }: Params) => {
         api.origin
     );
 
-    // Start Up
     server.listen(api.port, api.address);
 };
 
