@@ -4,12 +4,12 @@ import Bundle from "./bundle";
 import getAuthMiddleware from "./middleware/tokenAuth";
 import loadAlbumMiddleware from "./middleware/albumLoad";
 
-const createServer = (bundle: Bundle, origin: string) => {
+const createServer = (bundle: Bundle) => {
     const authMiddleware = getAuthMiddleware(bundle);
     const albumLoader = loadAlbumMiddleware(bundle);
 
     const api = createApi(bundle, authMiddleware, albumLoader);
-    const app = createApp(api, origin);
+    const app = createApp(api);
     return app;
 };
 

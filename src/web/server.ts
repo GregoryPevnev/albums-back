@@ -3,15 +3,15 @@ import parser from "body-parser";
 import cors from "cors";
 import morgan from "morgan";
 
-const createApp = (router: Router, appOrigin: string) => {
+const createApp = (router: Router) => {
     const app = express();
 
     app.use(morgan("combined"));
     app.use(
         cors({
-            origin: appOrigin,
             credentials: false,
-            exposedHeaders: ["JWT"]
+            exposedHeaders: ["JWT"],
+            origin: "*"
         })
     );
     app.use(parser.json());

@@ -12,7 +12,6 @@ interface Params {
     api: {
         port: number;
         address: string;
-        origin: string;
     };
     cache: {
         host: string;
@@ -39,26 +38,23 @@ const build = async ({ secret, schemaPath, api, cache, storage }: Params) => {
     const databaseManager = DatabaseManager.init(storageManager.objectsDeleter());
     console.log("Connected to Database");
 
-    const server = createServer(
-        {
-            tokens: cacheManager.tokensStore(),
-            userRepo: databaseManager.userRepo(),
-            albumRepo: cacheManager.proxyAlbumsRepo(databaseManager.albumRepo()),
-            reviewRepo: cacheManager.proxyReviewsRepo(databaseManager.reviewRepo()),
-            albumsQueries: {
-                search: cacheManager.searchCache(databaseManager.searchQuery()),
-                list: databaseManager.paginationQuery(),
-                my: databaseManager.myQuery()
-            },
-            validators,
-            getUploadURL: storageManager.uploader(),
-            resolveURL: storageManager.resolver(),
-            reviewsQuery: cacheManager.reviewsCache(databaseManager.reviewsQuery()),
-            tracksQuery: databaseManager.songsQuery(),
-            findAlbum: databaseManager.findQuery()
+    const server = createServer({
+        tokens: cacheManager.tokensStore(),
+        userRepo: databaseManager.userRepo(),
+        albumRepo: cacheManager.proxyAlbumsRepo(databaseManager.albumRepo()),
+        reviewRepo: cacheManager.proxyReviewsRepo(databaseManager.reviewRepo()),
+        albumsQueries: {
+            search: cacheManager.searchCache(databaseManager.searchQuery()),
+            list: databaseManager.paginationQuery(),
+            my: databaseManager.myQuery()
         },
-        api.origin
-    );
+        validators,
+        getUploadURL: storageManager.uploader(),
+        resolveURL: storageManager.resolver(),
+        reviewsQuery: cacheManager.reviewsCache(databaseManager.reviewsQuery()),
+        tracksQuery: databaseManager.songsQuery(),
+        findAlbum: databaseManager.findQuery()
+    });
 
     server.listen(api.port, api.address);
 };

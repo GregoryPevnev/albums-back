@@ -9,8 +9,7 @@ build({
     secret: String(process.env.SECRET),
     api: {
         port: Number(process.env.API_PORT),
-        address: String(process.env.API_ADDRESS),
-        origin: String(process.env.APP_ORIGIN)
+        address: String(process.env.API_ADDRESS)
     },
     schemaPath: String(process.env.SCHEMAS_PATH),
     cache: {
